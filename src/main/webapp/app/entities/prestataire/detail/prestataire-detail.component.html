@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="prestataire">
+      <h2 data-cy="prestataireDetailsHeading"><span jhiTranslate="projetApp.prestataire.detail.title">Prestataire</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ prestataire.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetApp.prestataire.nomPres">Nom Pres</span></dt>
+        <dd>
+          <span>{{ prestataire.nomPres }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetApp.prestataire.nomCont">Nom Cont</span></dt>
+        <dd>
+          <span>{{ prestataire.nomCont }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetApp.prestataire.prenomCont">Prenom Cont</span></dt>
+        <dd>
+          <span>{{ prestataire.prenomCont }}</span>
+        </dd>
+        <dt><span jhiTranslate="projetApp.prestataire.email">Email</span></dt>
+        <dd>
+          <span>{{ prestataire.email }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/prestataire', prestataire.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

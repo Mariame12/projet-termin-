@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-prestataire-heading" data-cy="PrestataireCreateUpdateHeading" jhiTranslate="projetApp.prestataire.home.createOrEditLabel">
+        Create or edit a Prestataire
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetApp.prestataire.nomPres" for="field_nomPres">Nom Pres</label>
+          <input type="text" class="form-control" name="nomPres" id="field_nomPres" data-cy="nomPres" formControlName="nomPres" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetApp.prestataire.nomCont" for="field_nomCont">Nom Cont</label>
+          <input type="text" class="form-control" name="nomCont" id="field_nomCont" data-cy="nomCont" formControlName="nomCont" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetApp.prestataire.prenomCont" for="field_prenomCont">Prenom Cont</label>
+          <input
+            type="text"
+            class="form-control"
+            name="prenomCont"
+            id="field_prenomCont"
+            data-cy="prenomCont"
+            formControlName="prenomCont"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="projetApp.prestataire.email" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

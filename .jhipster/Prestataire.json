@@ -1,0 +1,35 @@
+{
+  "fields": [
+    {
+      "fieldName": "nomPres",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nomCont",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prenomCont",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "consultant",
+      "otherEntityName": "consultant",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "prestataire"
+    }
+  ],
+  "service": "serviceImpl",
+  "dto": "no",
+  "jpaMetamodelFiltering": true,
+  "readOnly": false,
+  "pagination": "infinite-scroll",
+  "name": "Prestataire",
+  "changelogDate": "20210915083630"
+}

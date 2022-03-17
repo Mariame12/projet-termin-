@@ -1,0 +1,37 @@
+{
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fonction",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "prestataire",
+      "otherEntityName": "prestataire",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "nomPres"
+    },
+    {
+      "relationshipName": "fichePresence",
+      "otherEntityName": "fichePresence",
+      "relationshipType": "one-to-many",
+      "otherEntityRelationshipName": "consultant"
+    }
+  ],
+  "service": "serviceImpl",
+  "dto": "no",
+  "jpaMetamodelFiltering": true,
+  "readOnly": false,
+  "pagination": "infinite-scroll",
+  "name": "Consultant",
+  "changelogDate": "20210915102356"
+}

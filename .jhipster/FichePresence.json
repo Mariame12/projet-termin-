@@ -1,0 +1,40 @@
+{
+  "fields": [
+    {
+      "fieldName": "activites",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "heuredebut",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "commentaire",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "heurefin",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipName": "consultant",
+      "otherEntityName": "consultant",
+      "relationshipType": "many-to-one",
+      "otherEntityField": "id"
+    }
+  ],
+  "service": "serviceImpl",
+  "dto": "no",
+  "jpaMetamodelFiltering": true,
+  "readOnly": false,
+  "pagination": "infinite-scroll",
+  "name": "FichePresence",
+  "changelogDate": "20210915112319"
+}

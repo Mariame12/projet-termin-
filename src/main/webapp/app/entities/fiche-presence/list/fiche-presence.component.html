@@ -1,0 +1,106 @@
+<div>
+  <h2 id="page-heading" data-cy="FichePresenceHeading">
+    <span jhiTranslate="projetApp.fichePresence.home.title">Fiche Absences</span>
+
+    <div class="d-flex justify-content-end">
+      
+      <button class="btn btn-info mr-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="projetApp.fichePresence.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity" 
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-fiche-presence"
+        [routerLink]="['/fiche-presence/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="projetApp.fichePresence.home.createLabel"> Create a new Fiche Absence </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="fichePresences?.length === 0">
+    <span jhiTranslate="projetApp.fichePresence.home.notFound">No ficheAbsences found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="fichePresences && fichePresences.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="activites">
+            <span jhiTranslate="projetApp.fichePresence.activites">Activites</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          
+          <th scope="col" jhiSortBy="commentaire">
+            <span jhiTranslate="projetApp.fichePresence.commentaire">Commentaire</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+         
+          <th scope="col" jhiSortBy="date">
+            <span jhiTranslate="projetApp.fichePresence.date">Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="consultant.id">
+            <span jhiTranslate="projetApp.fichePresence.consultant">Consultant</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let fichePresence of fichePresences; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/fiche-presence', fichePresence.id, 'view']">{{ fichePresence.id }}</a>
+          </td>
+          <td>{{ fichePresence.activites }}</td>
+          <td>{{ fichePresence.commentaire }}</td>
+          <td>{{ fichePresence.date | formatMediumDate }}</td>
+          <td>
+            <div *ngIf="fichePresence.consultant">
+              <a [routerLink]="['/consultant', fichePresence.consultant?.id, 'view']">{{ fichePresence.consultant?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/fiche-presence', fichePresence.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/fiche-presence', fichePresence.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(fichePresence)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+              
+              <button class="btn btn-success">
+		        <fa-icon icon="save" [spin]="isLoading"></fa-icon>
+		        <a target="_blank" href="http://localhost:8080/api/fiche-presences/export/{{fichePresence.consultant?.id}}">
+		          <span>Exporter </span>
+		        </a>
+      		  </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
